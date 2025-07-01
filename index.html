@@ -67,6 +67,11 @@
       border-right: 1px solid rgba(0,0,0,0.2);
       display: none;
       flex-direction: column;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      height: calc(100vh - 70px);
+      z-index: 90;
     }
 
     .sidebar.active {
@@ -148,6 +153,11 @@
       max-width: 1200px;
       margin: 0 auto;
       width: 100%;
+      margin-left: var(--sidebar-width);
+    }
+
+    .content.no-sidebar {
+      margin-left: 0;
     }
 
     .bot-selection,
@@ -336,13 +346,22 @@
       margin-bottom: 20px;
     }
 
-    /* Mobile optimizations */
+    .sidebar-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
     @media (max-width: 768px) {
       .sidebar {
         position: fixed;
-        top: 0;
+        top: 70px;
         left: 0;
-        height: 100vh;
+        height: calc(100vh - 70px);
         z-index: 100;
         transform: translateX(-100%);
         transition: transform 0.3s ease;
@@ -352,12 +371,16 @@
         transform: translateX(0);
       }
 
+      .content {
+        margin-left: 0;
+      }
+
       .mobile-category-selector {
         display: block;
       }
 
       .sidebar-section {
-        display: none;
+        display: block;
       }
 
       .bot-grid {
@@ -384,6 +407,10 @@
         margin-top: 5px;
         width: fit-content;
       }
+
+      .sidebar-toggle {
+        display: block;
+      }
     }
 
     @media (max-width: 480px) {
@@ -408,22 +435,6 @@
         font-size: 0.85rem;
       }
     }
-
-    .sidebar-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.5rem;
-      margin-right: 15px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      .sidebar-toggle {
-        display: block;
-      }
-    }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -435,25 +446,25 @@
   </div>
 
   <div class="main-container">
-    <div id="bot-sidebar" class="sidebar">
+    <!-- Sidebar for Utils -->
+    <div id="utils-sidebar" class="sidebar">
       <div class="sidebar-content">
         <div class="sidebar-section">
           <div class="sidebar-title">Categories</div>
-          <div class="sidebar-item active" onclick="showCategory('moderation')">
+          <div class="sidebar-item active" onclick="showCategory('moderation', 'utils')">
             <i class="fas fa-gavel"></i> Moderation
           </div>
-          <div class="sidebar-item" onclick="showCategory('settings')">
+          <div class="sidebar-item" onclick="showCategory('settings', 'utils')">
             <i class="fas fa-cog"></i> Server Settings
           </div>
-          <div class="sidebar-item" onclick="showCategory('logs')">
+          <div class="sidebar-item" onclick="showCategory('logs', 'utils')">
             <i class="fas fa-scroll"></i> Logs
           </div>
-          <div class="sidebar-item" onclick="showCategory('information')">
+          <div class="sidebar-item" onclick="showCategory('information', 'utils')">
             <i class="fas fa-info-circle"></i> Information
           </div>
         </div>
       </div>
-
       <div class="sidebar-bots">
         <div class="sidebar-title">Switch Bot</div>
         <div class="sidebar-bot" onclick="showBotDetail('utils')">
@@ -475,7 +486,103 @@
       </div>
     </div>
 
-    <div class="content">
+    <!-- Sidebar for System -->
+    <div id="system-sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-section">
+          <div class="sidebar-title">Categories</div>
+          <div class="sidebar-item active" onclick="showCategory('management', 'system')">
+            <i class="fas fa-users-cog"></i> Server Management
+          </div>
+          <div class="sidebar-item" onclick="showCategory('poll', 'system')">
+            <i class="fas fa-poll"></i> Poll System
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-bots">
+        <div class="sidebar-title">Switch Bot</div>
+        <div class="sidebar-bot" onclick="showBotDetail('utils')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixUtils.png">
+          <span>Anvix Utils</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('system')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixSystem.png">
+          <span>Anvix System</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('assist')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixAssist.png">
+          <span>Anvix Assist</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('status')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixStatus.png">
+          <span>Anvix Status</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar for Assist -->
+    <div id="assist-sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-section">
+          <div class="sidebar-title">Categories</div>
+          <div class="sidebar-item active" onclick="showCategory('tickets', 'assist')">
+            <i class="fas fa-ticket-alt"></i> Ticket System
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-bots">
+        <div class="sidebar-title">Switch Bot</div>
+        <div class="sidebar-bot" onclick="showBotDetail('utils')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixUtils.png">
+          <span>Anvix Utils</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('system')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixSystem.png">
+          <span>Anvix System</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('assist')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixAssist.png">
+          <span>Anvix Assist</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('status')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixStatus.png">
+          <span>Anvix Status</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar for Status -->
+    <div id="status-sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-section">
+          <div class="sidebar-title">Categories</div>
+          <div class="sidebar-item active" onclick="showCategory('monitoring', 'status')">
+            <i class="fas fa-chart-line"></i> Monitoring
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-bots">
+        <div class="sidebar-title">Switch Bot</div>
+        <div class="sidebar-bot" onclick="showBotDetail('utils')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixUtils.png">
+          <span>Anvix Utils</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('system')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixSystem.png">
+          <span>Anvix System</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('assist')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixAssist.png">
+          <span>Anvix Assist</span>
+        </div>
+        <div class="sidebar-bot" onclick="showBotDetail('status')">
+          <img src="https://raw.githubusercontent.com/anvixstudios/Anvix-Studios/main/Media/AnvixStatus.png">
+          <span>Anvix Status</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content no-sidebar">
       <div id="bot-selection" class="bot-selection active">
         <h2>Our Bots</h2>
         <div class="bot-grid">
@@ -520,7 +627,7 @@
           Anvix Utils is a powerful moderation bot designed to help manage your Discord server with ease. It includes features for user management, content moderation, and server utility functions.
         </div>
 
-        <select class="mobile-category-selector" onchange="showCategory(this.value)">
+        <select class="mobile-category-selector" onchange="showCategory(this.value, 'utils')">
           <option value="moderation">Moderation</option>
           <option value="settings">Server Settings</option>
           <option value="logs">Logs</option>
@@ -721,7 +828,7 @@
           Anvix System is designed for advanced server management, including role management, channel organization, and server configuration.
         </div>
 
-        <select class="mobile-category-selector" onchange="showCategory(this.value)">
+        <select class="mobile-category-selector" onchange="showCategory(this.value, 'system')">
           <option value="management">Server Management</option>
           <option value="poll">Poll System</option>
         </select>
@@ -792,7 +899,11 @@
           Anvix Assist provides support features including ticketing systems, FAQ commands, and user assistance tools.
         </div>
 
-        <div class="category-section">
+        <select class="mobile-category-selector" onchange="showCategory(this.value, 'assist')">
+          <option value="tickets">Ticket System</option>
+        </select>
+
+        <div id="tickets" class="category-section">
           <h3 class="category-title"><i class="fas fa-ticket-alt"></i> Ticket System</h3>
           <div class="command-grid">
             <div class="command-card">
@@ -835,113 +946,148 @@
         <div class="bot-description">
           Anvix Status monitors your server's activity, provides statistics, and can alert you to important events or changes.
         </div>
-        
-        <div style="padding: 20px; text-align: center;">
-          <p><em>Currently in development</em></p>
+
+        <select class="mobile-category-selector" onchange="showCategory(this.value, 'status')">
+          <option value="monitoring">Monitoring</option>
+        </select>
+
+        <div id="monitoring" class="category-section">
+          <h3 class="category-title"><i class="fas fa-chart-line"></i> Monitoring</h3>
+          <div class="command-grid">
+            <div class="command-card">
+              <h3>Coming Soon</h3>
+              <p>Currently in development</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
+    let currentSidebar = null;
+
     function showBotDetail(botId) {
       document.getElementById('bot-selection').classList.remove('active');
       document.querySelectorAll('.bot-detail').forEach(el => el.classList.remove('active'));
       document.getElementById(botId).classList.add('active');
       
-      // Only show sidebar for Anvix Utils
-      if (botId === 'utils' && window.innerWidth > 768) {
-        document.getElementById('bot-sidebar').classList.add('active');
-      } else {
-        document.getElementById('bot-sidebar').classList.remove('active');
+      document.querySelectorAll('.sidebar').forEach(s => s.classList.remove('active'));
+      
+      const sidebar = document.getElementById(`${botId}-sidebar`);
+      if (sidebar) {
+        sidebar.classList.add('active');
+        currentSidebar = botId;
       }
       
-      // Show default category based on bot
-      if (botId === 'utils') {
-        showCategory('moderation');
-        if (document.querySelector('.mobile-category-selector')) {
-          document.querySelector('.mobile-category-selector').value = 'moderation';
-        }
-      } else if (botId === 'system') {
-        showCategory('management');
-        if (document.querySelector('.mobile-category-selector')) {
-          document.querySelector('.mobile-category-selector').value = 'management';
-        }
+      const content = document.querySelector('.content');
+      if (window.innerWidth > 768) {
+        content.classList.remove('no-sidebar');
+      } else {
+        content.classList.add('no-sidebar');
+      }
+      
+      switch(botId) {
+        case 'utils':
+          showCategory('moderation', 'utils');
+          break;
+        case 'system':
+          showCategory('management', 'system');
+          break;
+        case 'assist':
+          showCategory('tickets', 'assist');
+          break;
+        case 'status':
+          showCategory('monitoring', 'status');
+          break;
       }
     }
 
     function goBack() {
       document.querySelectorAll('.bot-detail').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.sidebar').forEach(s => s.classList.remove('active'));
       document.getElementById('bot-selection').classList.add('active');
-      document.getElementById('bot-sidebar').classList.remove('active');
+      document.querySelector('.content').classList.add('no-sidebar');
+      currentSidebar = null;
     }
 
-    function showCategory(categoryId) {
-      // Hide all category sections in the active bot detail
-      const activeBot = document.querySelector('.bot-detail.active');
+    function showCategory(categoryId, botId) {
+      const activeBotId = botId || currentSidebar;
+      if (!activeBotId) return;
+      
+      const activeBot = document.getElementById(activeBotId);
       if (activeBot) {
         activeBot.querySelectorAll('.category-section').forEach(el => {
           el.style.display = 'none';
         });
         
-        // Show selected category
         const category = activeBot.querySelector('#' + categoryId);
         if (category) {
           category.style.display = 'block';
         }
       }
       
-      // Update sidebar active item (only for Utils)
-      if (document.querySelector('.bot-detail.active').id === 'utils') {
-        document.querySelectorAll('.sidebar-item').forEach(el => {
+      const sidebar = document.getElementById(`${activeBotId}-sidebar`);
+      if (sidebar) {
+        sidebar.querySelectorAll('.sidebar-item').forEach(el => {
           el.classList.remove('active');
         });
         
-        const sidebarItem = document.querySelector(`.sidebar-item[onclick="showCategory('${categoryId}')"]`);
+        const sidebarItem = sidebar.querySelector(`.sidebar-item[onclick*="'${categoryId}'"]`);
         if (sidebarItem) {
           sidebarItem.classList.add('active');
         }
       }
       
-      // Update mobile selector
-      if (document.querySelector('.mobile-category-selector')) {
-        document.querySelector('.mobile-category-selector').value = categoryId;
+      const selector = document.querySelector(`#${activeBotId} .mobile-category-selector`);
+      if (selector) {
+        selector.value = categoryId;
       }
     }
 
     function toggleSidebar() {
-      const activeBot = document.querySelector('.bot-detail.active');
-      if (activeBot && activeBot.id === 'utils') {
-        const sidebar = document.getElementById('bot-sidebar');
+      if (!currentSidebar) return;
+      const sidebar = document.getElementById(`${currentSidebar}-sidebar`);
+      if (sidebar) {
         sidebar.classList.toggle('active');
+        
+        const content = document.querySelector('.content');
+        if (sidebar.classList.contains('active') && window.innerWidth > 768) {
+          content.classList.remove('no-sidebar');
+        } else {
+          content.classList.add('no-sidebar');
+        }
       }
     }
 
     document.addEventListener('click', function(event) {
-      const sidebar = document.getElementById('bot-sidebar');
-      const sidebarToggle = document.querySelector('.sidebar-toggle');
-      
-      if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
-        if (!sidebar.contains(event.target) && event.target !== sidebarToggle) {
-          sidebar.classList.remove('active');
-        }
+      if (window.innerWidth <= 768) {
+        const sidebars = document.querySelectorAll('.sidebar');
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+        
+        sidebars.forEach(sidebar => {
+          if (sidebar.classList.contains('active')) {
+            if (!sidebar.contains(event.target) && event.target !== sidebarToggle) {
+              sidebar.classList.remove('active');
+              document.querySelector('.content').classList.add('no-sidebar');
+            }
+          }
+        });
       }
     });
 
     window.addEventListener('resize', function() {
+      const content = document.querySelector('.content');
       if (window.innerWidth <= 768) {
-        document.querySelector('.sidebar-section').style.display = 'none';
-      } else {
-        document.querySelector('.sidebar-section').style.display = 'block';
+        content.classList.add('no-sidebar');
+      } else if (currentSidebar) {
+        content.classList.remove('no-sidebar');
       }
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-      if (window.innerWidth <= 768) {
-        document.querySelector('.sidebar-section').style.display = 'none';
-      }
-      // Hide sidebar by default
-      document.getElementById('bot-sidebar').classList.remove('active');
+      document.querySelectorAll('.sidebar').forEach(s => s.classList.remove('active'));
+      document.querySelector('.content').classList.add('no-sidebar');
     });
   </script>
 </body>
