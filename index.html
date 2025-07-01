@@ -440,11 +440,11 @@
           <div class="sidebar-item active" onclick="showCategory('moderation')">
             <i class="fas fa-gavel"></i> Moderation
           </div>
-          <div class="sidebar-item" onclick="showCategory('utility')">
-            <i class="fas fa-tools"></i> Utility
-          </div>
           <div class="sidebar-item" onclick="showCategory('settings')">
             <i class="fas fa-cog"></i> Server Settings
+          </div>
+                    <div class="sidebar-item" onclick="showCategory('logs')">
+            <i class="fas fa-scroll"></i> Logs
           </div>
           <div class="sidebar-item" onclick="showCategory('information')">
             <i class="fas fa-info-circle"></i> Information
@@ -520,8 +520,8 @@
 
         <select class="mobile-category-selector" onchange="showCategory(this.value)">
           <option value="moderation">Moderation</option>
-          <option value="utility">Utility</option>
           <option value="settings">Server Settings</option>
+           <option value="logs">Logs</option>
           <option value="information">Information</option>
         </select>
 
@@ -533,7 +533,6 @@
               <p>Issue a warning to a user</p>
               <div class="command-options">
                 <span class="command-option">user</span>
-                <span class="command-option">reason</span>
               </div>
               <span class="command-permission permission-staff">STAFF</span>
             </div>
@@ -543,6 +542,16 @@
               <p>List all warnings of a user</p>
               <div class="command-options">
                 <span class="command-option">user</span>
+              </div>
+              <span class="command-permission permission-staff">STAFF</span>
+            </div>
+            
+            <div class="command-card">
+              <h3>/remove_warning</h3>
+              <p>Remove a warning from a user</p>
+              <div class="command-options">
+                <span class="command-option">user</span>
+                <span class="command-option">warn_id</span>
               </div>
               <span class="command-permission permission-staff">STAFF</span>
             </div>
@@ -568,11 +577,52 @@
             </div>
             
             <div class="command-card">
+              <h3>/hackban</h3>
+              <p>Ban a user who isn't on the server</p>
+              <div class="command-options">
+                <span class="command-option">user_id</span>
+                <span class="command-option">reason</span>
+              </div>
+              <span class="command-permission permission-admin">ADMIN</span>
+            </div>
+            
+            <div class="command-card">
+              <h3>/tempban</h3>
+              <p>Temporarily ban a user</p>
+              <div class="command-options">
+                <span class="command-option">user</span>
+                <span class="command-option">duration</span>
+                <span class="command-option">reason</span>
+              </div>
+              <span class="command-permission permission-admin">ADMIN</span>
+            </div>
+            
+            <div class="command-card">
+              <h3>/unban</h3>
+              <p>Unban a user</p>
+              <div class="command-options">
+                <span class="command-option">user_id</span>
+                <span class="command-option">reason</span>
+              </div>
+              <span class="command-permission permission-admin">ADMIN</span>
+            </div>
+            
+            <div class="command-card">
               <h3>/timeout</h3>
               <p>Timeout a user for a specific duration</p>
               <div class="command-options">
                 <span class="command-option">user</span>
                 <span class="command-option">duration</span>
+                <span class="command-option">reason</span>
+              </div>
+              <span class="command-permission permission-mod">MOD</span>
+            </div>
+            
+            <div class="command-card">
+              <h3>/untimeout</h3>
+              <p>Remove timeout from a user</p>
+              <div class="command-options">
+                <span class="command-option">user</span>
                 <span class="command-option">reason</span>
               </div>
               <span class="command-permission permission-mod">MOD</span>
@@ -590,74 +640,54 @@
           </div>
         </div>
 
-        <div id="utility" class="category-section" style="display:none">
-          <h3 class="category-title"><i class="fas fa-tools"></i> Utility</h3>
-          <div class="command-grid">
-            <div class="command-card">
-              <h3>/userinfo</h3>
-              <p>Get information about a user</p>
-              <div class="command-options">
-                <span class="command-option">user (optional)</span>
-              </div>
-            </div>
-            
-            <div class="command-card">
-              <h3>/serverinfo</h3>
-              <p>Get information about the server</p>
-            </div>
-            
-            <div class="command-card">
-              <h3>/avatar</h3>
-              <p>Get a user's avatar</p>
-              <div class="command-options">
-                <span class="command-option">user (optional)</span>
-              </div>
-            </div>
-            
-            <div class="command-card">
-              <h3>/slowmode</h3>
-              <p>Set slowmode in a channel</p>
-              <div class="command-options">
-                <span class="command-option">seconds</span>
-                <span class="command-option">channel (optional)</span>
-              </div>
-              <span class="command-permission permission-staff">STAFF</span>
-            </div>
-          </div>
-        </div>
 
         <div id="settings" class="category-section" style="display:none">
           <h3 class="category-title"><i class="fas fa-cog"></i> Server Settings</h3>
           <div class="command-grid">
-            <div class="command-card">
-              <h3>/setnick</h3>
-              <p>Change a member's nickname</p>
-              <div class="command-options">
-                <span class="command-option">user</span>
-                <span class="command-option">nickname</span>
-              </div>
-              <span class="command-permission permission-admin">ADMIN</span>
-            </div>
             
             <div class="command-card">
-              <h3>/lock</h3>
-              <p>Lock a channel for everyone</p>
-              <div class="command-options">
-                <span class="command-option">channel (optional)</span>
-              </div>
-              <span class="command-permission permission-admin">ADMIN</span>
+              <h3>soon</h3>
+              <p>Currently in development</p>
+
             </div>
-            
-            <div class="command-card">
-              <h3>/unlock</h3>
-              <p>Unlock a channel for everyone</p>
-              <div class="command-options">
-                <span class="command-option">channel (optional)</span>
-              </div>
-              <span class="command-permission permission-admin">ADMIN</span>
-            </div>
+
           </div>
         </div>
+
+
+        <div id="logs" class="category-section" style="display:none">
+          <h3 class="category-title"><i class="fas fa-scroll"></i> Command Logs</h3>
+          <div class="command-grid">
+            
+            <div class="command-card">
+              <h3>/command_logs</h3>
+              <p>Shows the latest commands of a user</p>
+              <div class="command-options">
+                <span class="command-option">user (optional)</span>
+                <span class="command-option">user_id (optional)</span>
+                <span class="command-option">limit</span>
+              </div>
+              <span class="command-permission permission-staff">STAFF</span>
+            </div>
+
+                    
+            <div class="command-card">
+              <h3>/command_logs_delete</h3>
+              <p>Delete command log entries of a user</p>
+              <div class="command-options">
+                <span class="command-option">user (optional)</span>
+                <span class="command-option">user_id (optional)</span>
+                <span class="command-option">limit (optional)</span>
+              </div>
+              <span class="command-permission permission-admin">ADMIN</span>
+            </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        
 
         <div id="information" class="category-section" style="display:none">
           <h3 class="category-title"><i class="fas fa-info-circle"></i> Information</h3>
@@ -669,16 +699,42 @@
                 <span class="command-option">command (optional)</span>
               </div>
             </div>
+
+
+        <div class="command-card">
+              <h3>/userinfo</h3>
+              <p>Get information about a user</p>
+              <div class="command-options">
+                <span class="command-option">user (optional)</span>
+              </div>
+            </div>
+
+        
+                    
             
             <div class="command-card">
-              <h3>/ping</h3>
-              <p>Check bot latency</p>
+              <h3>/server_info</h3>
+              <p>Get information about the server</p>
             </div>
+
             
+          </div>
+        </div>
+
+        <div id="logs" class="category-section" style="display:none">
+          <h3 class="category-title"><i class="fas fa-scroll"></i> Command Logs</h3>
+          <div class="command-grid">
             <div class="command-card">
-              <h3>/stats</h3>
-              <p>Show bot statistics</p>
+              <h3>/command_logs</h3>
+              <p>Shows the latest commands of a user</p>
+              <div class="command-options">
+                <span class="command-option">user (optional)</span>
+                <span class="command-option">user_id (optional)</span>
+                <span class="command-option">limit</span>
+              </div>
+              <span class="command-permission permission-staff">STAFF</span>
             </div>
+
           </div>
         </div>
       </div>
@@ -751,9 +807,11 @@
       document.querySelectorAll('.bot-detail').forEach(el => el.classList.remove('active'));
       document.getElementById(botId).classList.add('active');
       
-      // Only show sidebar on desktop
-      if (window.innerWidth > 768) {
+      // Only show sidebar for Anvix Utils
+      if (botId === 'utils' && window.innerWidth > 768) {
         document.getElementById('bot-sidebar').classList.add('active');
+      } else {
+        document.getElementById('bot-sidebar').classList.remove('active');
       }
       
       showCategory('moderation');
@@ -791,8 +849,11 @@
     }
 
     function toggleSidebar() {
-      const sidebar = document.getElementById('bot-sidebar');
-      sidebar.classList.toggle('active');
+      const activeBot = document.querySelector('.bot-detail.active');
+      if (activeBot && activeBot.id === 'utils') {
+        const sidebar = document.getElementById('bot-sidebar');
+        sidebar.classList.toggle('active');
+      }
     }
 
     document.addEventListener('click', function(event) {
@@ -818,6 +879,8 @@
       if (window.innerWidth <= 768) {
         document.querySelector('.sidebar-section').style.display = 'none';
       }
+      // Hide sidebar by default
+      document.getElementById('bot-sidebar').classList.remove('active');
     });
   </script>
 </body>
