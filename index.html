@@ -172,11 +172,8 @@
 
     .bot-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      justify-items: start; /* Ändere dies von 'center' zu 'start' für linksbündige Ausrichtung */
-      margin-left: 0; /* Entferne eventuelle Standard-Margins */
-      padding-left: 0; /* Entferne eventuelle Standard-Paddings */
     }
 
     .bot-card {
@@ -947,7 +944,7 @@
         </div>
         
         <div class="bot-description">
-          Anvix Status monitors your server's activity, provides statistics, and can alert you to important events or changes.
+          Anvix Status monitors the activity of other Anvix bots and provides statistics.
         </div>
 
         <select class="mobile-category-selector" onchange="showCategory(this.value, 'status')">
