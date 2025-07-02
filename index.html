@@ -791,17 +791,8 @@
           <div class="command-grid">
             <div class="command-card">
               <h3>/help</h3>
-              <p>Show help information</p>
+              <p>Shows the help for the bot.</p>
               <div class="command-options">
-                <span class="command-option">command (optional)</span>
-              </div>
-            </div>
-
-            <div class="command-card">
-              <h3>/userinfo</h3>
-              <p>Get information about a user</p>
-              <div class="command-options">
-                <span class="command-option">user (optional)</span>
               </div>
             </div>
             
@@ -825,7 +816,7 @@
         </div>
         
         <div class="bot-description">
-          Anvix System is designed for advanced server management, including role management, channel organization, and server configuration.
+          Anvix System is designed for advanced server management, including role management, channel organization, and server configuration. It supports only prefix commands (no slash commands).
         </div>
 
         <select class="mobile-category-selector" onchange="showCategory(this.value, 'system')">
@@ -837,21 +828,26 @@
           <h3 class="category-title"><i class="fas fa-users-cog"></i> Server Management</h3>
           <div class="command-grid">
             <div class="command-card">
-              <h3>/roles</h3>
+              <h3>//roles</h3>
               <p>Manage server roles and permissions</p>
               <span class="command-permission permission-director">DIRECTOR</span>
             </div>
             
             <div class="command-card">
-              <h3>/rules</h3>
+              <h3>//rules</h3>
               <p>Configure server rules and guidelines</p>
               <span class="command-permission permission-director">DIRECTOR</span>
             </div>
             
             <div class="command-card">
-              <h3>/studio_team</h3>
+              <h3>//studio_team</h3>
               <p>Manage studio team members and roles</p>
               <span class="command-permission permission-director">DIRECTOR</span>
+            </div>
+
+            <div class="command-card">
+              <h3>//help</h3>
+              <p>Shows the help for the bot.</p>
             </div>
           </div>
         </div>
@@ -927,6 +923,11 @@
               <h3>/close</h3>
               <p>Close an active ticket</p>
               <span class="command-permission permission-staff">STAFF</span>
+            </div>
+
+            <div class="command-card">
+              <h3>/help</h3>
+              <p>Shows the help for the bot.</p>
             </div>
           </div>
         </div>
